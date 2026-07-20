@@ -1,0 +1,37 @@
+2026/07/17-13:56:29.185 31a47 Reusing MANIFEST /Users/user/dev/sites/giftcardbot/bridge/.wwebjs_auth/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/07/17-13:56:29.186 31a47 Recovering log #95
+2026/07/17-13:56:29.218 31a47 Reusing old log /Users/user/dev/sites/giftcardbot/bridge/.wwebjs_auth/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000095.log 
+2026/07/17-20:07:38.780 31a6b Level-0 table #104: started
+2026/07/17-20:07:38.966 31a6b Level-0 table #104: 1245424 bytes OK
+2026/07/17-20:07:38.972 31a6b Delete type=0 #95
+2026/07/17-20:07:39.047 31a49 Compacting 1@1 + 5@2 files
+2026/07/17-20:07:39.545 31a49 Generated table #105@1: 45799 keys, 2211832 bytes
+2026/07/17-20:07:39.718 31a49 Generated table #106@1: 1593 keys, 2144045 bytes
+2026/07/17-20:07:39.857 31a49 Generated table #107@1: 14037 keys, 2194365 bytes
+2026/07/17-20:07:40.088 31a49 Generated table #108@1: 63499 keys, 2210068 bytes
+2026/07/17-20:07:40.134 31a49 Generated table #109@1: 23876 keys, 595027 bytes
+2026/07/17-20:07:40.134 31a49 Compacted 1@1 + 5@2 files => 9355337 bytes
+2026/07/17-20:07:40.147 31a49 compacted to: files[ 0 0 5 0 0 0 0 ]
+2026/07/17-20:07:40.148 31a49 Delete type=2 #101
+2026/07/17-20:07:40.149 31a49 Delete type=2 #100
+2026/07/17-20:07:40.149 31a49 Delete type=2 #104
+2026/07/17-20:07:40.149 31a49 Delete type=2 #98
+2026/07/17-20:07:40.149 31a49 Delete type=2 #99
+2026/07/17-20:07:40.149 31a49 Delete type=2 #97
+2026/07/17-20:25:03.750 31a6b Level-0 table #111: started
+2026/07/17-20:25:03.791 31a6b Level-0 table #111: 1595164 bytes OK
+2026/07/17-20:25:03.795 31a6b Delete type=0 #103
+2026/07/17-20:36:07.507 31a49 Compacting 1@1 + 5@2 files
+2026/07/17-20:36:07.603 31a49 Generated table #112@1: 47026 keys, 2221487 bytes
+2026/07/17-20:36:07.655 31a49 Generated table #113@1: 1649 keys, 2151178 bytes
+2026/07/17-20:36:07.711 31a49 Generated table #114@1: 10677 keys, 2180130 bytes
+2026/07/17-20:36:07.793 31a49 Generated table #115@1: 26082 keys, 2172493 bytes
+2026/07/17-20:36:07.862 31a49 Generated table #116@1: 66201 keys, 1495034 bytes
+2026/07/17-20:36:07.862 31a49 Compacted 1@1 + 5@2 files => 10220322 bytes
+2026/07/17-20:36:07.865 31a49 compacted to: files[ 0 0 5 0 0 0 0 ]
+2026/07/17-20:36:07.867 31a49 Delete type=2 #105
+2026/07/17-20:36:07.867 31a49 Delete type=2 #111
+2026/07/17-20:36:07.868 31a49 Delete type=2 #107
+2026/07/17-20:36:07.868 31a49 Delete type=2 #106
+2026/07/17-20:36:07.868 31a49 Delete type=2 #108
+2026/07/17-20:36:07.868 31a49 Delete type=2 #109

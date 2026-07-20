@@ -1,0 +1,6 @@
+2026/07/17-13:56:26.663 31ab6 Reusing MANIFEST /Users/user/dev/sites/giftcardbot/bridge/.wwebjs_auth/session/Default/Local Storage/leveldb/MANIFEST-000001
+2026/07/17-13:56:26.667 31ab6 Recovering log #3
+2026/07/17-13:56:26.667 31ab6 Reusing old log /Users/user/dev/sites/giftcardbot/bridge/.wwebjs_auth/session/Default/Local Storage/leveldb/000003.log 
+2026/07/17-20:39:35.142 31ab9 Level-0 table #5: started
+2026/07/17-20:39:35.162 31ab9 Level-0 table #5: 17610 bytes OK
+2026/07/17-20:39:35.166 31ab9 Delete type=0 #3

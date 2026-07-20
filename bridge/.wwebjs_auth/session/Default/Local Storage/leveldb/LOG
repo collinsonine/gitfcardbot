@@ -1,0 +1,6 @@
+2026/07/20-16:34:01.433 4bbec Reusing MANIFEST /Users/user/dev/sites/giftcardbot/bridge/.wwebjs_auth/session/Default/Local Storage/leveldb/MANIFEST-000001
+2026/07/20-16:34:01.437 4bbec Recovering log #4
+2026/07/20-16:34:01.442 4bbec Reusing old log /Users/user/dev/sites/giftcardbot/bridge/.wwebjs_auth/session/Default/Local Storage/leveldb/000004.log 
+2026/07/20-20:11:16.052 4bbef Level-0 table #8: started
+2026/07/20-20:11:16.090 4bbef Level-0 table #8: 15112 bytes OK
+2026/07/20-20:11:16.100 4bbef Delete type=0 #4
