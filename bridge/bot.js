@@ -63,25 +63,30 @@ async function createClient() {
 
     const fs = require('fs');
     const path = require('path');
-    const authDir = path.join(__dirname, '.wwebjs_auth');
-    if (fs.existsSync(authDir)) {
-        const findLocks = (dir) => {
-            for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-                const full = path.join(dir, entry.name);
-                if (entry.isDirectory()) findLocks(full);
+
+    const profileDir = path.join(__dirname, '.wwebjs_profile');
+    const authDir = path.join(process.cwd(), '.wwebjs_auth');
+
+    [profileDir, authDir].forEach((dir) => {
+        if (!fs.existsSync(dir)) return;
+        const walk = (d) => {
+            for (const entry of fs.readdirSync(d, { withFileTypes: true })) {
+                const full = path.join(d, entry.name);
+                if (entry.isDirectory()) walk(full);
                 else if (entry.name === 'SingletonLock') {
                     fs.unlinkSync(full);
                     console.log(`Removed stale lock: ${full}`);
                 }
             }
         };
-        findLocks(authDir);
-    }
+        walk(dir);
+    });
 
     client = new Client({
         authStrategy: new LocalAuth(),
         puppeteer: {
             headless: true,
+            userDataDir: profileDir,
             args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
         },
     });
