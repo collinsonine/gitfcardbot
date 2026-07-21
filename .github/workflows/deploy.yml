@@ -28,17 +28,6 @@ jobs:
         extensions: mbstring, xml, ctype, iconv, pdo_mysql, bcmath
         coverage: none
 
-    - name: Install Composer Dependencies
-      run: composer install json --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-
-    - name: Prepare Environment for Testing
-      run: |
-        cp .env.example .env
-        echo "DB_CONNECTION=mysql" >> .env
-        echo "DB_DATABASE=giftcard_ledger_test" >> .env
-        echo "DB_USERNAME=root" >> .env
-        echo "DB_PASSWORD=" >> .env
-
     - name: Run Tests via Pest (Avoid Surprises)
       run: php artisan test
 
