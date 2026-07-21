@@ -61,6 +61,23 @@ async function createClient() {
 
     latestQr = null;
 
+    const fs = require('fs');
+    const path = require('path');
+    const authDir = path.join(__dirname, '.wwebjs_auth');
+    if (fs.existsSync(authDir)) {
+        const findLocks = (dir) => {
+            for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+                const full = path.join(dir, entry.name);
+                if (entry.isDirectory()) findLocks(full);
+                else if (entry.name === 'SingletonLock') {
+                    fs.unlinkSync(full);
+                    console.log(`Removed stale lock: ${full}`);
+                }
+            }
+        };
+        findLocks(authDir);
+    }
+
     client = new Client({
         authStrategy: new LocalAuth(),
         puppeteer: {
@@ -148,8 +165,10 @@ async function createClient() {
 
     try {
         await client.initialize();
+        console.log('WhatsApp client initialized successfully.');
     } catch (err) {
         console.error('Client initialize() failed:', err.message);
+        console.error('Stack:', err.stack);
         if (retryCount < MAX_RETRIES) {
             retryCount++;
             console.log(`Retrying in ${RETRY_DELAY_MS / 1000}s (attempt ${retryCount}/${MAX_RETRIES})...`);
