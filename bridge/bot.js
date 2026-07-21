@@ -5,7 +5,11 @@ const qrcodeTerminal = require('qrcode-terminal');
 const QRCode = require('qrcode');
 const os = require('os');
 
-const LARAVEL_LISTENER_URL = process.env.LARAVEL_LISTENER_URL || 'http://giftcardbot.test/api/whatsapp/listener';
+if (!process.env.LARAVEL_LISTENER_URL) {
+  console.error('FATAL: LARAVEL_LISTENER_URL environment variable is not set.');
+  process.exit(1);
+}
+const LARAVEL_LISTENER_URL = process.env.LARAVEL_LISTENER_URL;
 const BRIDGE_PORT = process.env.BRIDGE_PORT || 3001;
 const BRIDGE_SECRET = process.env.BRIDGE_SECRET || 'change-me';
 
@@ -60,7 +64,6 @@ async function createClient() {
         authStrategy: new LocalAuth(),
         puppeteer: {
             headless: true,
-            executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
             args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
         },
     });
