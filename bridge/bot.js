@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { Client, LocalAuth, List, MessageMedia } = require('whatsapp-web.js');
 const express = require('express');
 const axios = require('axios');

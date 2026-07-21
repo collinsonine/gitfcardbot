@@ -46,7 +46,8 @@ jobs:
           git pull origin main
 
           # 2. Update Production Dependencies & Cache
-          composer install --no-dev --optimize-autoloader
+          export COMPOSER_ALLOW_SUPERUSER=1
+          php8.5 /usr/local/bin/composer update --no-interaction --prefer-dist --optimize-autoloader --ignore-platform-reqs
           php artisan migrate --force
           php artisan optimize:clear
           php artisan config:cache
