@@ -1,0 +1,77 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ] # Triggers the deploy every time you push to the main branch
+
+jobs:
+  laravel-tests:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: giftcard_ledger_test
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.5'
+        extensions: mbstring, xml, ctype, iconv, pdo_mysql, bcmath
+        coverage: none
+
+    - name: Install Composer Dependencies
+      run: composer install json --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+    - name: Prepare Environment for Testing
+      run: |
+        cp .env.example .env
+        echo "DB_CONNECTION=mysql" >> .env
+        echo "DB_DATABASE=giftcard_ledger_test" >> .env
+        echo "DB_USERNAME=root" >> .env
+        echo "DB_PASSWORD=" >> .env
+
+    - name: Run Tests via Pest (Avoid Surprises)
+      run: php artisan test
+
+  deploy-to-vps:
+    needs: laravel-tests # Only runs if the test suite passes perfectly
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Execute Remote SSH Commands
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          # 1. Update Laravel Codebase
+          cd /var/www/giftcard-ledger
+          git pull origin main
+
+          # 2. Update Production Dependencies & Cache
+          composer install --no-dev --optimize-autoloader
+          php artisan migrate --force
+          php artisan optimize:clear
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
+
+          # 3. Restart Queue Workers (Supervisor)
+          sudo supervisorctl restart laravel-worker:*
+
+          # 4. Update Node.js Bridge (If changes were made there)
+          cd /var/www/whatsapp-bridge
+          git pull origin main
+          npm install --production
+          pm2 restart whatsapp-bridge
